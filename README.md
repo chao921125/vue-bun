@@ -3,11 +3,15 @@
 # install and upgrade bun js
 curl -fsSL https://bun.sh/install | bash
 bun upgrade
-# install bun js
+# create
 bun create vite bun-vue
 # install bun js
+bun add vue
+bun add -D @types/vue
+bun remove ts-node
+bun update
 bun install
-bun --watch run dev
+bun run dev --watch
 ```
 # Vue 3 + Vite
 
