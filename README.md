@@ -1,22 +1,23 @@
 # API
 ```shell
-# install and upgrade bun js
+# Mac Linux Windows 安装 bun
 curl -fsSL https://bun.sh/install | bash
+
+powershell -c "irm bun.sh/install.ps1 | iex"
+
+# bun 升级 或者继续执行安装
 bun upgrade
-# create
+# 创建项目
 bun create vite bun-vue
-# install bun js
+bun init
+# 依赖包操作
 bun add vue
 bun add -D @types/vue
 bun remove ts-node
-bun update
 bun install
 bun run dev --watch
+# 基于 package.json 更新到最新的依赖版本
+bun update
+# 将 package.json 内部依赖版本更新到最新
+bunx taze -w
 ```
-# Vue 3 + Vite
-
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
-
-## Recommended IDE Setup
-
-- [VS Code](https://code.visualstudio.com/) + [Vue - Official](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (previously Volar) and disable Vetur
