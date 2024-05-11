@@ -16,8 +16,8 @@ bun add -D @types/vue
 bun remove ts-node
 bun install
 bun run dev --watch
-# 基于 package.json 更新到最新的依赖版本
+# 基于 package.json 更新到最新的依赖版本，不更新 package.json
 bun update
-# 将 package.json 内部依赖版本更新到最新
+# 将 package.json 内部依赖版本更新到最新，更新 package.json
 bunx taze -w
 ```
