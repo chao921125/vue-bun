@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<style>
+
+
+		/* ---------------- */
+		.block--appear.start__text,
+		.block--appear.track__title,
+		.block--disappear.start__text,
+		.block--disappear.track__title {
+			position: relative;
+			opacity: 1;
+			-webkit-animation: text-appear 1s steps(1) 1;
+			animation: text-appear 1s steps(1) 1;
+		}
+
+		.block--appear.start__text:after,
+		.block--appear.track__title:after,
+		.block--disappear.start__text:after,
+		.block--disappear.track__title:after {
+			content: '';
+			position: absolute;
+			left: 0;
+			top: 0;
+			height: 100%;
+			width: 0;
+			background-color: #EFEFEF;
+			-webkit-animation: block-appear 1s ease-in-out 1;
+			animation: block-appear 1s ease-in-out 1;
+		}
+
+		@-webkit-keyframes block-appear {
+			0% {
+				width: 0;
+			}
+
+			40% {
+				width: 100%;
+				left: 0;
+			}
+
+			80% {
+				left: 100%;
+				width: 0;
+			}
+
+			100% {
+				left: 100%;
+				width: 0;
+			}
+		}
+
+		@keyframes block-appear {
+			0% {
+				width: 0;
+			}
+
+			40% {
+				width: 100%;
+				left: 0;
+			}
+
+			80% {
+				left: 100%;
+				width: 0;
+			}
+
+			100% {
+				left: 100%;
+				width: 0;
+			}
+		}
+
+		@-webkit-keyframes text-appear {
+			0% {
+				color: transparent;
+			}
+
+			50% {
+				color: #EFEFEF;
+			}
+
+			100% {
+				color: #EFEFEF;
+			}
+		}
+
+		@keyframes text-appear {
+			0% {
+				color: transparent;
+			}
+
+			50% {
+				color: #EFEFEF;
+			}
+
+			100% {
+				color: #EFEFEF;
+			}
+		}
+
+		.block--disappear.start__text,
+		.block--disappear.track__title,
+		.block--disappear.start__text:after,
+		.block--disappear.track__title:after {
+			animation-direction: reverse;
+		}
+
+		.block--fadein.track__duration,
+		.block--fadeout.track__duration {
+			opacity: 1;
+			-webkit-animation: fade-in 1.5s linear 1;
+			animation: fade-in 1.5s linear 1;
+		}
+
+		@-webkit-keyframes fade-in {
+			0% {
+				opacity: 0;
+			}
+
+			65% {
+				opacity: 0;
+			}
+
+			90% {
+				opacity: 1;
+			}
+
+			100% {
+				opacity: 1;
+			}
+		}
+
+		@keyframes fade-in {
+			0% {
+				opacity: 0;
+			}
+
+			65% {
+				opacity: 0;
+			}
+
+			90% {
+				opacity: 1;
+			}
+
+			100% {
+				opacity: 1;
+			}
+		}
+
+		.block--fadeout.track__duration {
+			animation-direction: reverse;
+		}
+
+		.start__icon {
+			opacity: 1;
+			-webkit-animation: blink 1.5s ease-in-out infinite;
+			animation: blink 1.5s ease-in-out infinite;
+		}
+
+		@-webkit-keyframes blink {
+			0% {
+				opacity: 1;
+			}
+
+			6% {
+				opacity: 1;
+			}
+
+			50% {
+				opacity: 0;
+			}
+
+			94% {
+				opacity: 1;
+			}
+
+			100% {
+				opacity: 1;
+			}
+		}
+
+		@keyframes blink {
+			0% {
+				opacity: 1;
+			}
+
+			6% {
+				opacity: 1;
+			}
+
+			50% {
+				opacity: 0;
+			}
+
+			94% {
+				opacity: 1;
+			}
+
+			100% {
+				opacity: 1;
+			}
+		}
+
+		/* ---------------- */
+		/* ---------------- */
+		body {
+			height: 100vh;
+			background-color: #EFEFEF;
+			color: #EFEFEF;
+		}
+
+		main {
+			position: relative;
+			z-index: 1;
+		}
+
+		canvas {
+			z-index: 2999;
+			position: fixed;
+			width: 100%;
+			height: auto;
+			top: 0;
+			left: 0;
+			pointer-events: none;
+			mix-blend-mode: difference;
+			background-color: #000;
+		}
+		/* ---------------- */
+
+
+
+		/* ---------------- */
+		body.show-tracks .tracks {
+			display: grid;
+			padding-right: 1.5em;
+			grid-template-columns: repeat(12, 8.333%);
+			grid-template-rows: repeat(50, 2em);
+			grid-template-areas: "t1  t1  t1  .   .   .   .  t2  t2  t2  t2  t2" ".   .   .   .   .   .   .   .   .   .   .   ." ".   .   .   .   .   .   .   .   .   .   .   ." ".  t3  t3  t3  t3   .   .   .   .  t5  t5  t5" ".   .   .   .   .   .   .   .   .   .   .   ." ".   .   .   .   .   t4  t4  t4  t4  .   .   ." ".   .   .   .   .   .   .   .   .   .   .   ." "t6 t6  t6   .   .   .   .   .   .   .   .   ." ".   .   .   .   .   .   .   t8  t8  t8  t8  ." ".   .   .   .   .   .   .   .   .   .   .   ." ".   .  t7  t7  t7   .   .   .   .   .   .   ." ".   .   .   .   .   .   .   .   .   .   .   ." ".   .   .   .   .   .   .   .  t10 t10 t10 t10" ".   .   .   .   .   .   .   .   .   .   .   ." ".   .   .   t9  t9  t9  t9  t9  .   .   .   ." ".   .   .   .   .   .   .   .   .   .   .   ." "t12 t12 t12 .   .   .   .   .   .  t11 t11 t11" ".   .   .   .   .   .   .   .   .   .   .   ." ".   .   .   .  t13 t13 t13  .   .   .   .   ." ".   .   .   .   .   .   .   .   .   .   .   ." ".   .   .   .   .   .   .  t14 t14 t14  .   ." ".   .   .   .   .   .   .   .   .   .   .   ." "t15 t15 t15 .   .   .   .   .   .   .   .   ." ".   .   .   .   .   t16 t16 t16 .   .   .   ." ".   .   .   .   .   .   .   .   .   .   .   ." ".   .   .   .   .   .   .   .   .   .   .   ." ".   .   .   .   .   .   .   .   .  t17 t17 t17" ".  t18 t18 t18  .   .   .   .   .   .   .   ." ".   .   .   .   .   .   .   .   .   .   .   ." ".   .   .   .   .  t19 t19 t19  .   .  t20 t20" ".   .   .   .   .   .   .   .   .   .   .   ." ".  t21 t21 t21 t21  .   .   .   .   .   .   ." ".   .   .   .   .   .   .   .   .   .   .   ." ".   .   .   .   .   .  t22 t22 t22  .   .   ." ".   .   .   .   .   .   .   .   .   .   .   ." "t23 t23 t23 t23 .   .   .   .   .   .   .   ." ".   .   .   .   .   .   .   .   .   .   .   ." ".   .   .   .  t24 t24 t24  .   .   .   .   ." ".   .   .   .   .   .   .   .  t25 t25 t25 t25" ".  t26 t26 t26  .   .   .   .   .   .   .   ." ".   .   .   .   .   .   .   .   .   .   .   ." ".   .   .   .   .  t27 t27 t27 t27  .   .   ." ".   .   .   .   .   .   .   .   .   .   .   ." ".   .   .   .   .   .   .   .   .  t29 t29 t29" ".   .  t28 t28 t28 t28  .   .   .   .   .   ." ".   .   .   .   .   .   .   .   .   .   .   ." ".   .   .   .   .   .  t31 t31 t31  .   .   ." "t30 t30 t30 .   .   .   .   .   .   .   .   ." ".   .   .   .   .   .   .   .   .  t32 t32 t32";
+		}
+
+		.tracks {
+			display: none;
+			width: 100%;
+		}
+
+		.track:nth-child(1) {
+			grid-area: t1;
+		}
+
+		.track:nth-child(2) {
+			grid-area: t2;
+		}
+
+		.track:nth-child(3) {
+			grid-area: t3;
+		}
+
+		.track:nth-child(4) {
+			grid-area: t4;
+		}
+
+		.track:nth-child(5) {
+			grid-area: t5;
+		}
+
+		.track:nth-child(6) {
+			grid-area: t6;
+		}
+
+		.track:nth-child(7) {
+			grid-area: t7;
+		}
+
+		.track:nth-child(8) {
+			grid-area: t8;
+		}
+
+		.track:nth-child(9) {
+			grid-area: t9;
+		}
+
+		.track:nth-child(10) {
+			grid-area: t10;
+		}
+
+		.track:nth-child(11) {
+			grid-area: t11;
+		}
+
+		.track:nth-child(12) {
+			grid-area: t12;
+		}
+
+		.track:nth-child(13) {
+			grid-area: t13;
+		}
+
+		.track:nth-child(14) {
+			grid-area: t14;
+		}
+
+		.track:nth-child(15) {
+			grid-area: t15;
+		}
+
+		.track:nth-child(16) {
+			grid-area: t16;
+		}
+
+		.track:nth-child(17) {
+			grid-area: t17;
+		}
+
+		.track:nth-child(18) {
+			grid-area: t18;
+		}
+
+		.track:nth-child(19) {
+			grid-area: t19;
+		}
+
+		.track:nth-child(20) {
+			grid-area: t20;
+		}
+
+		.track:nth-child(21) {
+			grid-area: t21;
+		}
+
+		.track:nth-child(22) {
+			grid-area: t22;
+		}
+
+		.track:nth-child(23) {
+			grid-area: t23;
+		}
+
+		.track:nth-child(24) {
+			grid-area: t24;
+		}
+
+		.track:nth-child(25) {
+			grid-area: t25;
+		}
+
+		.track:nth-child(26) {
+			grid-area: t26;
+		}
+
+		.track:nth-child(27) {
+			grid-area: t27;
+		}
+
+		.track:nth-child(28) {
+			grid-area: t28;
+		}
+
+		.track:nth-child(29) {
+			grid-area: t29;
+		}
+
+		.track:nth-child(30) {
+			grid-area: t30;
+		}
+
+		.track:nth-child(31) {
+			grid-area: t31;
+		}
+
+		.track:nth-child(32) {
+			grid-area: t32;
+		}
+
+		.track:nth-child(32) {
+			opacity: 0;
+		}
+
+		.track__duration {
+			opacity: 0;
+		}
+
+		.track__title {
+			opacity: 0;
+			cursor: pointer;
+		}
+
+		/* ---------------- */
+		/* ---------------- */
+		@media screen and (max-width: 960px) {
+
+			.track__duration {
+				font-size: 12px;
+				line-height: 16px;
+			}
+
+			.track__title {
+				font-size: 22px;
+				line-height: 34px;
+			}
+
+			body.show-tracks .tracks {
+				display: grid;
+				padding: 5em 5em;
+				padding-right: 1.5em;
+				grid-template-columns: repeat(12, 8.333%);
+				grid-template-rows: repeat(60, 2em);
+				grid-template-areas: "t1  t1  t1  t1  .   .   t2 t2  t2  t2  t2  t2" ".   .   .   .   .   .   .   .   .   .   .   ." ".   .   .   .   .   .   .   .   .   .   .   ." ".   t3  t3  t3   t3  .   .   .   t5  t5  t5 ." ".   .   .   .   .   .   .   .   .   .   .   ." ".   .   .   .   t4  t4  t4  t4  t4  .   .   ." ".   .   .   .   .   .   .   .   .   .   .   ." ".   .   .   .   .   .   .   .   .   .   .   ." "t6  t6  t6  t6  .   .   .   .   .   .   .   ." ".   .   .   .   .   . t8   t8  t8  t8  t8  t8" ".   .   .   .   .   .   .   .   .   .   .   ." ".   .  t7  t7  t7  t7   .   .   .   .   .   ." ".   .   .   .   .   .   .   .   .   .   .   ." ".   .   .   .   .   .   .   .  t10 t10 t10 t10" ".   .   .   .   .   .   .   .   .   .   .   ." ".   .   .  t9  t9  t9  t9  t9  t9   .   .   ." ".   .   .   .   .   .   .   .   .   .   .   ." "t12 t12 t12 t12 .   .   .   .   . t11 t11 t11" ".   .   .   .   .   .   .   .   .   .   .   ." ".   .   .   .  t13 t13 t13  .   .   .   .   ." ".   .   .   .   .   .   .   .   .   .   .   ." ".   .   .   .   .   .   .   .  t14 t14 t14  ." ".   .   .   .   .   .   .   .   .   .   .   ." "t15 t15 t15 t15 .   .   .   .   .   .   .   ." ".   .   .   .   .   t16 t16 t16 .   .   .   ." ".   .   .   .   .   .   .   .   .   .   .   ." ".   .   .   .   .   .   .   .   .   .   .   ." ".   .   .   .   .   .   .   .  t17 t17 t17  ." ".   .   .   .   .   .   .   .   .   .   .   ." ".  t18 t18 t18  .   .   .   .   .   .   .   ." ".   .   .   .   .   .   .   .   .   .   .   ." ".   .   .   .   .   .   .   .   .   .   .   ." ".   .   .   .  t19 t19 t19  .   .  t20 t20 t20" ".   .   .   .   .   .   .   .   .   .   .   ." ".   .   .   .   .   .   .   .   .   .   .   ." ".  t21 t21 t21 t21  .   .   .   .   .   .   ." ".   .   .   .   .   .   .   .   .   .   .   ." ".   .   .   .   .   .  t22 t22 t22 t22  .   ." ".   .   .   .   .   .   .   .   .   .   .   ." "t23 t23 t23 t23 t23 .   .   .   .   .   .   ." ".   .   .   .   .   .   .   .   .   .   .   ." ".   .   .   .  t24 t24 t24 t24  .   .   .   ." ".   .   .   .   .   .   .   .   .   .   .   ." ".   .   .   .   .   .   .  t25 t25 t25 t25 t25" ".   .   .   .   .   .   .   .   .   .   .   ." ".  t26 t26 t26  .   .   .   .   .   .   .   ." ".   .   .   .   .   .   .   .   .   .   .   ." ".   .   .   .   .  t27 t27 t27 t27  .   .   ." ".   .   .   .   .   .   .   .   .   .   .   ." ".   .   .   .   .   .   .   .   .   .   .   ." ".   .   .   .   .   .   .   . t29 t29 t29 t29" ".   .  t28 t28 t28 t28  .   .   .   .   .   ." ".   .   .   .   .   .   .   .   .   .   .   ." ".   .   .   .   .   .  t31 t31 t31  .   .   ." ".   .   .   .   .   .   .   .   .   .   .   ." "t30 t30 t30 t30 .   .   .   .   .   .   .   ." ".   .   .   .   .   .   .   .   .   .   .   ." ".   .   .   .   .   .   .   .   .   .   .   ." ".   .   .   .   .   .   .   .  t32 t32 t32  .";
+			}
+		}
+
+		@media screen and (max-width: 640px) {
+
+			.track__duration {
+				font-size: 11px;
+				line-height: 15px;
+			}
+
+			.track__title {
+				font-size: 20px;
+				line-height: 26px;
+			}
+
+			.track__title {
+				display: inline-block;
+				white-space: nowrap;
+			}
+
+			body.show-tracks .tracks {
+				display: grid;
+				padding: 3em 3em 5em;
+				padding-right: 1.25em;
+				grid-template-columns: repeat(12, 8.333%);
+				grid-template-rows: repeat(65, 2em);
+				grid-template-areas: ".  t1  t1  t1  t1   .   .   .   .   .   .   ." ".   .   .   .   .   .   .   .   .   .   .   ." ".   .   .   .   .   .   .   .   .   .   .   ." ".   .  t2  t2  t2  t2  t2  t2  t2   .   .   ." ".   .   .   .   .   .   .   .   .   .   .   ." ".   .   .   .   .   .   .   .   .   .   .   ." "t3  t3  t3  t3  t3  .   .   .   .   .   .   ." ".   .   .   .   .   .   .   .   .   .   .   ." ".   .   .   .   .   .   .  t5  t5   .   .   ." ".   .   .   .   .   .   .   .   .   .   .   ." ".   .  t4   t4  t4  t4  t4  .   .   .   .   ." ".   .   .   .   .   .   .   .   .   .   .   ." ".   .   .   .   .   .   .   .   .   .   .   ." "t6  t6  t6  t6  .   .   .   .   .   .   .   ." ".   .   .   .   .   .   .   .   .   .   .   ." ".   .   .  t8  t8  t8  t8  t8  t8  t8   .   ." ".   .   .   .   .   .   .   .   .   .   .   ." ".   .   .   .   .   .   .   t10 t10 t10 .   ." ".   .   .   .   .   .   .   .   .   .   .   ." ".   t7  t7  t7  .   .   .   .   .   .   .   ." ".   .   .   .   .   .   .   .   .   .   .   ." ".   .   .   .   .   .   .   .   .   .   .   ." ".   .   t9  t9  t9  t9  t9  .   .   .   .   ." ".   .   .   .   .   .   .   .   .   .   .   ." ".   .   .   .   .   .   .   .   .   .   .   ." "t12 t12 t12 .   .   .   .   .   .   .   .   ." ".   .   .   .   .   . t11 t11 t11 t11   .   ." ".   .   .   .   .   .   .   .   .   .   .   ." ".   .   . t13 t13 t13   .   .   .   .   .   ." ".   .   .   .   .   .   .   .   .   .   .   ." ".   .   .   .   .   .   .  t14 t14 t14  .   ." ".   .   .   .   .   .   .   .   .   .   .   ." "t15 t15 t15 .   .   .   .   .   .   .   .   ." ".   .   .   .   .   .   .   .  t16 t16 t16  ." ".   .   .   .   .   .   .   .   .   .   .   ." ".   .   .  t17 t17  .   .   .   .   .   .   ." ".   .   .   .   .   .   .   .   .   .   .   ." ".   .   .   .   .   .  t18 t18 t18  .   .   ." ".   .   .   .   .   .   .   .   .   .   .   ." ".   .   .   .   .   .   .   .   .   .   .   ." ".   .   .   .  t19 t19 t19  .   .   .   .   ." ".   .   .   .   .   .   .   .   .  t20 t20  ." ".   .   .   .   .   .   .   .   .   .   .   ." "t21 t21 t21 t21 t21 .   .   .   .   .   .   ." ".   .   .   .   .   .   .   .   .   .   .   ." ".   .   .   .   .   .  t22 t22 t22 t22 t22  ." ".   .   .   .   .   .   .   .   .   .   .   ." ".   .   .   .   .   .   .   .   .   .   .   ." "t23 t23 t23 t23 t23 .   .   .   .   .   .   ." ".   .   .   .   .   .   .   .   .   .   .   ." ".   .   .   .  t24 t24 t24 t24  .   .   .   ." ".   .   .   .   .   .   .   .   .   .   .   ." ".   .   .   .   .   .   .   .   .   .   .   ." ".   .   .   .   .  t25 t25 t25 t25 t25 t25  ." ".   .   .   .   .   .   .   .   .   .   .   ." ".  t26 t26 t26  .   .   .   .   .   .   .   ." ".   .   .   .   .   .   .   .   .   .   .   ." ".   .   .   .  t27 t27 t27 t27 t27  .   .   ." ".   .   .   .   .   .   .   .   .   .   .   ." ".   .   .   .   .   .   .   .   .   .   .   ." ".   .   .   .   .   .   . t29 t29 t29 t29 t29" ".   .   .   .   .   .   .   .   .   .   .   ." ".   . t28 t28 t28 t28 t28   .   .   .   .   ." ".   .   .   .   .   .   .   .   .   .   .   ." ".   .   .   .   .   .   .   .   .   .   .   ." ".   .   .   .   .   . t31 t31 t31   .   .   ." ".   .   .   .   .   .   .   .   .   .   .   ." "t30 t30 t30 t30 .   .   .   .   .   .   .   ." ".   .   .   .   .   .   .   .   .   .   .   ." ".   .   .   .   .   .   .   . t32 t32 t32 t32";
+			}
+		}
+
+	</style>
+</head>
+
+<body class="show-tracks">
+
+<main class="main-home">
+
+	<div class="tracks" style="pointer-events: all;">
+
+		<div class="track play-track" data-track="1" data-slug="tracks/ghostsss">
+			<span class="track__title block--appear">ghostsss</span>
+			<span class="track__duration block--fadein">03:24</span>
+		</div>
+
+		<div class="track play-track" data-track="2" data-slug="tracks/strange-attractor">
+			<span class="track__title block--appear">strange attractor</span>
+			<span class="track__duration block--fadein">03:30</span>
+		</div>
+
+		<div class="track play-track" data-track="3" data-slug="tracks/mittergries">
+			<span class="track__title block--appear">Mittergries</span>
+			<span class="track__duration block--fadein">03:31</span>
+		</div>
+
+		<div class="track play-track" data-track="4" data-slug="tracks/stays-nowhere">
+			<span class="track__title block--appear">stays nowhere</span>
+			<span class="track__duration block--fadein">01:44</span>
+		</div>
+
+		<div class="track play-track" data-track="5" data-slug="tracks/adgro">
+			<span class="track__title block--appear">adgro</span>
+			<span class="track__duration block--fadein">01:44</span>
+		</div>
+
+	</div>
+
+	<canvas id="canvas" resize=""></canvas>
+</main>
+</body>
+</html>
