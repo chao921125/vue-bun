@@ -33,6 +33,10 @@
 				cursor: pointer;
 				font-size: 1rem;
 				white-space: nowrap;
+				&:hover {
+					font-weight: bold;
+					color: #00ff00;
+				}
 			}
 			.ani_track {
 				&.title {
