@@ -6,6 +6,10 @@
 					<span class="ani_track title">This is Test Text</span>
 					<span class="ani_flashing duration">99：00</span>
 				</div>
+				<div class="grid-item">
+					<span class="ani_track title">This is Test Text</span>
+					<span class="ani_flashing duration">99：00</span>
+				</div>
 			</div>
 		</div>
 	</div>
